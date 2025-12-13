@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chats App</title>
+    <style>
+        .chat {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .message {
+            background-color: #f1f1f1;
+            padding: 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h3>All Chats</h3>
+    <% for(let chat of chats){ %>
+        <div class="chat">
+            <p><strong>From:</strong> <%= chat.from %></p>
+            <div class="message"><p><%= chat.msg %></p></div>
+            <p><strong>Received by:</strong> <%= chat.to %></p>
+        </div>
+    <% } %>
+</body>
+</html>
