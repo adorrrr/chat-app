@@ -5,9 +5,13 @@ const mongoose = require("mongoose");
 const path = require("path");
 const Chat = require("./models/chat.js");
 
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({extended: true }));
+
+
 
 //mongoose setup
 main().then( () => {
@@ -20,6 +24,7 @@ async function main() {
 };
 
 
+
 //Index route
 app.get("/chats", async (req, res) => {
     try {
@@ -30,6 +35,40 @@ app.get("/chats", async (req, res) => {
         res.send("Error loading chats");
     }
 });
+
+
+
+//New route
+app.get("/chats/new", (req, res) =>{
+    res.render("new.ejs");
+});
+
+
+
+//Create route
+app.post("/chats", (req, res) => {
+    let {from, to, msg } = req.body;
+    let newChat = new Chat({
+        from: from,
+        to: to,
+        msg: msg,
+        created_at: new Date()
+    });
+
+    newChat.save()
+    .then(res => {
+        console.log("chat was save!");
+    }).catch((err) => {
+         console.log(err);
+    });
+    res.redirect("/chats");
+
+});
+
+
+
+
+
 
 
 app.listen(8080, ()=>{
