@@ -6,6 +6,7 @@ const path = require("path");
 const Chat = require("./models/chat.js");
 
 
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -80,8 +81,9 @@ app.get("/chats/:id/edit", async (req, res) => {
 app.put("/chats/:id", async (req,res)=> {
     let {id} = req.params;
     let {newMsg} = req.body;
-    let updateChat = await Chat.findById(id, {msg : newMsg}, {});
-})
+    let updateChat = await Chat.findById(id, {msg : newMsg}, {runValidators:true, new:true});
+    res.redirect("/chats");
+});
 
 
 
