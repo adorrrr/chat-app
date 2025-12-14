@@ -1,13 +1,13 @@
 //Express require
 const express = require("express");
 const app = express();
-//Mongoose require
 const mongoose = require("mongoose");
-//EJS require
 const path = require("path");
+const Chat = require("./models/chat.js");
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
-const Chat = require("./models/chat.js");
+app.use(express.static(path.join(__dirname, "public")));
 
 //mongoose setup
 main().then( () => {
