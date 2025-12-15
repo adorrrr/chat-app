@@ -77,7 +77,6 @@ app.get("/chats/:id/edit", async (req, res) => {
 });
 
 
-
 //Update route
 app.put("/chats/:id", async (req,res)=> {
     let {id} = req.params;
